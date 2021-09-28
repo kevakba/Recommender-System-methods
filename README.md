@@ -1,4 +1,4 @@
-# Recommender-System-methods
+# Recommender System methods
 
 **1. Matrix Factorization**
 
@@ -28,7 +28,7 @@ From the above equation, p_ik and q_kj can both be updated through iterations un
 
 ![image](https://user-images.githubusercontent.com/61937357/135052713-26e778dd-402b-4533-bbba-0aa133b37a73.png)
 
-Implementation for the above method is [](here)
+Implementation for the above method is [here](https://github.com/kevakba/Recommender-System-methods/blob/main/Recommender_System_%E2%80%94_Matrix_Factorization.ipynb)
 
 
 **2. Neural Network based Matrix Factorization**
