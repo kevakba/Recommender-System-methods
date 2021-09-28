@@ -1,6 +1,6 @@
 # Recommender System methods
 
-**1. Matrix Factorization**
+## 1. Matrix Factorization
 
 Define a set of Users (U), items (D) such that the Matrix R is of size (|U| X |D|) and includes all the ratings given by users. The goal is to discover K latent features. Given with the input of two matrics matrices P (|U| X k) and Q (|D| X k), it would generate the product result R.
 
@@ -16,7 +16,7 @@ To get two entities of both P and Q, we need to initialize the two matrices and 
 
 ![image](https://user-images.githubusercontent.com/61937357/135052074-7326262c-1cc6-45e8-8280-c68f30efefe7.png)
 
-To minimize the error, the gradient is able to minimize the error, and therefore we differentiate the above equation with respect to these two variables separately.
+To minimlease refer this [paper](https://arxiv.org/abs/1708.05031) for more details.ize the error, the gradient is able to minimize the error, and therefore we differentiate the above equation with respect to these two variables separately.
 
 ![image](https://user-images.githubusercontent.com/61937357/135052192-091925f8-dc22-48a0-a000-b547c8400307.png)
 
@@ -31,4 +31,31 @@ From the above equation, p_ik and q_kj can both be updated through iterations un
 Implementation for the above method is [here](https://github.com/kevakba/Recommender-System-methods/blob/main/Recommender_System_%E2%80%94_Matrix_Factorization.ipynb).
 
 
-**2. Neural Network based Matrix Factorization**
+## 2. Neural Network based Matrix Factorization
+
+Following is the framework for the model:
+
+![image](https://user-images.githubusercontent.com/61937357/135059723-f1dc0d07-9fb4-4a89-b5ab-a3c88620108f.png)
+
+It mainly contains two units viz. Generalized Matrix Factorization (GMF) & Multi-Layer Perceptron (MLP).
+
+say p_u = User embedded latent vector & q_u = Item embedded latent vector
+
+**A. Generalized Matrix Factorization (GMF)**
+
+MF can be interpreted as a framework to mimick colaborative filtering. It basically takes-in the embedded vectors of user and item, perform element-wise multiplication and pass the resultant vector into an activation function (linear or non-linear). Hence it helps in capturing the interactions between user and item latent features, just like in collaborative filtering method.
+
+![image](https://user-images.githubusercontent.com/61937357/135062389-eefddc79-d04e-4dab-9507-77e7da4f8990.png)
+
+**B. Multi-Layer Perceptron (MLP)**
+
+MLP takes in the embedded vectors of user and item, concatenate them and pass the resultant vector into a feedforward neural network. In this sense, we can
+endow the model a large level of flexibility and non-linearity to learn the interactions between user and item.
+
+![image](https://user-images.githubusercontent.com/61937357/135062470-fe633d87-7509-40fb-97c6-ca3bb9380957.png)
+
+The above two vectors from GMF and MLP are then concatenated and passed into a final Output layer for prediction. Output layer may be linear for regression task or with non-linear activation function (like sigmoid) for classification task.
+
+Please refer this [paper](https://arxiv.org/abs/1708.05031) for more details.
+
+
