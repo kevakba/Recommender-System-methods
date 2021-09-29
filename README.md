@@ -42,6 +42,20 @@ Consider the case in which the rating of target item t for user u needs to be de
 
 ![image](https://user-images.githubusercontent.com/61937357/135267428-ad907eca-a012-4535-af6e-5ffbed772503.png)
 
+### 1.1 Dimensionality Reduction and Neighborhood Methods:
+
+The reduced representation will either compress the item dimensionality or the user dimensionality into latent factors. This reduced representation can be used to alleviate the sparsity problem for neighborhood-based models. Depending on which dimension has been compressed into latent factors, the reduced representation can be used for either user-based neighborhood algorithms or item-based neighborhood algorithms.
+
+R = (m-user X n-item) matrix
+R_f = R filled with row-wise mean for NaN values
+
+Simularity matrix (S) = R_f.T X R_f = P X E X P.T
+
+P = (n X n) matrix with columns as eigen vectors of S <br>
+E = (n X n) diagonal matrix with diagonal elements as eigen values of S <br>
+P_d = (n X d) matrix with only d dominant eigen vectors of of S <br>
+R_f X P_d = (m X d) matrix with each users having latent representation <br>
+
 
 
 ## 2. Matrix Factorization
