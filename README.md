@@ -32,6 +32,15 @@ The Pearson correlation coefficient can be modified to include the weights as fo
 
 **B. Item-Based Collaborative Filtering**
 
+Let U_i be the indices of the set of users who have specified ratings for item i. Then, the adjusted cosine similarity between the items (columns) i and j is defined as follows:
+
+![image](https://user-images.githubusercontent.com/61937357/135266846-a55d1250-9033-4f9b-9838-40b209aded31.png)
+
+Here S is itemswise mean-centred rating. Although the Pearson correlation can also be used on the columns in the case of the item-based method, the adjusted cosine generally provides superior results.
+
+Consider the case in which the rating of target item t for user u needs to be determined. The first step is to determine the top-k most similar items to item t based on the aforementioned adjusted cosine similarity. Let the top-k matching items to item t, for which the user u has specified ratings, be denoted by Q_t (u).
+
+![image](https://user-images.githubusercontent.com/61937357/135267428-ad907eca-a012-4535-af6e-5ffbed772503.png)
 
 
 
