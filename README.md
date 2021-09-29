@@ -1,6 +1,41 @@
 # Recommender System methods
 
-## 1. Matrix Factorization
+## 1. Collaborative Filtering
+
+Since the collaborative filtering problem can be viewed as a generalization of the classification/regression modeling problem, neighborhood-based methods can be viewed as generalizations of nearest neighbor classifiers in the machine learning literature.
+
+**A. User-Based Neighborhood Models**
+
+![image](https://user-images.githubusercontent.com/61937357/135264158-055ad2fd-84d7-4747-aa8c-df15ec137c55.png)
+
+![image](https://user-images.githubusercontent.com/61937357/135264824-130791f8-4a1f-4d8b-8312-6fc006a7bda3.png)
+
+![image](https://user-images.githubusercontent.com/61937357/135265005-89a6af61-5d7f-43fe-9144-02f0b86af5b1.png)
+
+The mean-centering process enables a much better relative prediction with respect to the ratings that have already been observed.
+
+In general, the Pearson correlation coefficient is preferable to the raw cosine because of the bias adjustment effect of mean-centering. The Pearson correlation coefficient is much more discriminative and the sign of the coefficient provides information about similarity and dissimilarity.
+
+When the two users have only a small number of ratings in common, the similarity function should be reduced with a discount factor to de-emphasize the importance of that user pair. The same can be calculated as under:
+
+![image](https://user-images.githubusercontent.com/61937357/135265575-824acee3-da76-4677-8ac2-4b34bbb6a3de.png)
+
+Here beta is an integer value of choice.
+
+Some movies may be very popular and they may repeatedly occur as commonly rated items by different users. Such ratings can sometimes worsen the quality of the recommendations because they tend to be less discriminative across different users. Inverse document frequency can be used. If m_j is the number of ratings of item j, and m is the total number of users, then the weight w_j of the item j is set to the following:
+
+![image](https://user-images.githubusercontent.com/61937357/135265978-d65a2019-8e8e-4caf-be54-89c271f2dca0.png)
+
+The Pearson correlation coefficient can be modified to include the weights as follows:
+
+![image](https://user-images.githubusercontent.com/61937357/135266266-ff61a471-6b92-48bb-8339-bb38f5077449.png)
+
+**B. Item-Based Collaborative Filtering**
+
+
+
+
+## 2. Matrix Factorization
 
 Define a set of Users (U), items (D) such that the Matrix R is of size (|U| X |D|) and includes all the ratings given by users. The goal is to discover K latent features. Given with the input of two matrics matrices P (|U| X k) and Q (|D| X k), it would generate the product result R.
 
@@ -31,7 +66,7 @@ From the above equation, p_ik and q_kj can both be updated through iterations un
 Implementation for the above method is [here](https://github.com/kevakba/Recommender-System-methods/blob/main/Recommender_System_%E2%80%94_Matrix_Factorization.ipynb).
 
 
-## 2. Neural Network based Matrix Factorization
+## 3. Neural Network based Matrix Factorization
 
 Following is the framework for the model:
 
