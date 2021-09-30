@@ -117,3 +117,11 @@ The above two vectors from GMF and MLP are then concatenated and passed into a f
 Please refer this [paper](https://arxiv.org/abs/1708.05031) for more details.
 
 
+## 4. Decision and Regression Trees
+
+- Let's suppose we have Rating matrix (R) of size (mXn).
+- To predict all the ratings of any item column i, we use (n-1) columns as predictor and apply decision tree regressor or classifier, depending upon the avilable data.
+- Before applying DT model, we use these (n-1) columns and reduce them into (mXd) matrix with SVD, where d<<(n-1), inorder to remove the sparcity.
+- We do above steps for all the columns and hence we would have (n) decision trees for predicting each and every ratings in our table. 
+
+
