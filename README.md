@@ -74,7 +74,7 @@ To get two entities of both P and Q, we need to initialize the two matrices and 
 
 ![image](https://user-images.githubusercontent.com/61937357/135052074-7326262c-1cc6-45e8-8280-c68f30efefe7.png)
 
-To minimlease refer this [paper](https://arxiv.org/abs/1708.05031) for more details.ize the error, the gradient is able to minimize the error, and therefore we differentiate the above equation with respect to these two variables separately.
+To minimize the error, the gradient is able to minimize the error, and therefore we differentiate the above equation with respect to these two variables separately.
 
 ![image](https://user-images.githubusercontent.com/61937357/135052192-091925f8-dc22-48a0-a000-b547c8400307.png)
 
