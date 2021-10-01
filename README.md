@@ -1,6 +1,64 @@
 # Recommender System methods
 
-## 1. Matrix Factorization
+## 1. Collaborative Filtering
+
+Since the collaborative filtering problem can be viewed as a generalization of the classification/regression modeling problem, neighborhood-based methods can be viewed as generalizations of nearest neighbor classifiers in the machine learning literature.
+
+**A. User-Based Neighborhood Models**
+
+![image](https://user-images.githubusercontent.com/61937357/135264158-055ad2fd-84d7-4747-aa8c-df15ec137c55.png)
+
+![image](https://user-images.githubusercontent.com/61937357/135264824-130791f8-4a1f-4d8b-8312-6fc006a7bda3.png)
+
+![image](https://user-images.githubusercontent.com/61937357/135265005-89a6af61-5d7f-43fe-9144-02f0b86af5b1.png)
+
+The mean-centering process enables a much better relative prediction with respect to the ratings that have already been observed.
+
+In general, the Pearson correlation coefficient is preferable to the raw cosine because of the bias adjustment effect of mean-centering. The Pearson correlation coefficient is much more discriminative and the sign of the coefficient provides information about similarity and dissimilarity.
+
+When the two users have only a small number of ratings in common, the similarity function should be reduced with a discount factor to de-emphasize the importance of that user pair. The same can be calculated as under:
+
+![image](https://user-images.githubusercontent.com/61937357/135265575-824acee3-da76-4677-8ac2-4b34bbb6a3de.png)
+
+Here beta is an integer value of choice.
+
+Some movies may be very popular and they may repeatedly occur as commonly rated items by different users. Such ratings can sometimes worsen the quality of the recommendations because they tend to be less discriminative across different users. Inverse document frequency can be used. If m_j is the number of ratings of item j, and m is the total number of users, then the weight w_j of the item j is set to the following:
+
+![image](https://user-images.githubusercontent.com/61937357/135265978-d65a2019-8e8e-4caf-be54-89c271f2dca0.png)
+
+The Pearson correlation coefficient can be modified to include the weights as follows:
+
+![image](https://user-images.githubusercontent.com/61937357/135266266-ff61a471-6b92-48bb-8339-bb38f5077449.png)
+
+**B. Item-Based Collaborative Filtering**
+
+Let U_i be the indices of the set of users who have specified ratings for item i. Then, the adjusted cosine similarity between the items (columns) i and j is defined as follows:
+
+![image](https://user-images.githubusercontent.com/61937357/135266846-a55d1250-9033-4f9b-9838-40b209aded31.png)
+
+Here S is itemswise mean-centred rating. Although the Pearson correlation can also be used on the columns in the case of the item-based method, the adjusted cosine generally provides superior results.
+
+Consider the case in which the rating of target item t for user u needs to be determined. The first step is to determine the top-k most similar items to item t based on the aforementioned adjusted cosine similarity. Let the top-k matching items to item t, for which the user u has specified ratings, be denoted by Q_t (u).
+
+![image](https://user-images.githubusercontent.com/61937357/135267428-ad907eca-a012-4535-af6e-5ffbed772503.png)
+
+### 1.1 Dimensionality Reduction and Neighborhood Methods:
+
+The reduced representation will either compress the item dimensionality or the user dimensionality into latent factors. This reduced representation can be used to alleviate the sparsity problem for neighborhood-based models. Depending on which dimension has been compressed into latent factors, the reduced representation can be used for either user-based neighborhood algorithms or item-based neighborhood algorithms.
+
+R = (m-user X n-item) matrix
+R_f = R filled with row-wise mean for NaN values
+
+Simularity matrix (S) = R_f.T X R_f = P X E X P.T
+
+P = (n X n) matrix with columns as eigen vectors of S <br>
+E = (n X n) diagonal matrix with diagonal elements as eigen values of S <br>
+P_d = (n X d) matrix with only d dominant eigen vectors of of S <br>
+R_f X P_d = (m X d) matrix with each users having latent representation <br>
+
+
+
+## 2. Matrix Factorization
 
 Define a set of Users (U), items (D) such that the Matrix R is of size (|U| X |D|) and includes all the ratings given by users. The goal is to discover K latent features. Given with the input of two matrics matrices P (|U| X k) and Q (|D| X k), it would generate the product result R.
 
@@ -16,7 +74,7 @@ To get two entities of both P and Q, we need to initialize the two matrices and 
 
 ![image](https://user-images.githubusercontent.com/61937357/135052074-7326262c-1cc6-45e8-8280-c68f30efefe7.png)
 
-To minimlease refer this [paper](https://arxiv.org/abs/1708.05031) for more details.ize the error, the gradient is able to minimize the error, and therefore we differentiate the above equation with respect to these two variables separately.
+To minimize the error, the gradient is able to minimize the error, and therefore we differentiate the above equation with respect to these two variables separately.
 
 ![image](https://user-images.githubusercontent.com/61937357/135052192-091925f8-dc22-48a0-a000-b547c8400307.png)
 
@@ -31,7 +89,7 @@ From the above equation, p_ik and q_kj can both be updated through iterations un
 Implementation for the above method is [here](https://github.com/kevakba/Recommender-System-methods/blob/main/Recommender_System_%E2%80%94_Matrix_Factorization.ipynb).
 
 
-## 2. Neural Network based Matrix Factorization
+## 3. Neural Network based Matrix Factorization
 
 Following is the framework for the model:
 
@@ -57,5 +115,19 @@ endow the model a large level of flexibility and non-linearity to learn the inte
 The above two vectors from GMF and MLP are then concatenated and passed into a final Output layer for prediction. Output layer may be linear for regression task or with non-linear activation function (like sigmoid) for classification task.
 
 Please refer this [paper](https://arxiv.org/abs/1708.05031) for more details.
+
+
+## 4. Decision and Regression Trees:
+
+- Let's suppose we have Rating matrix (R) of size (mXn).
+- To predict all the ratings of any item column i, we use (n-1) columns as predictor and apply decision tree regressor or classifier, depending upon the avilable data.
+- Before applying DT model, we use these (n-1) columns and reduce them into (mXd) matrix with SVD, where d<<(n-1), inorder to remove the sparcity.
+- We do above steps for all the columns and hence we would have (n) decision trees for predicting each and every ratings in our table. 
+
+
+## 5. Naive Bayes Collaborative Filtering:
+
+![image](https://user-images.githubusercontent.com/61937357/135510703-e770da6f-c5bb-4e4f-89ff-89a14e3bbfac.png)
+
 
 
