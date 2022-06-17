@@ -3,7 +3,7 @@
 This repo contains the explanation of some of the recommender system methods present in the literature. I have tried to implement them using python and tested their performance. Enjoy the reading.
 
 ## 1. Collaborative Filtering
-
+Ref: https://dl.acm.org/doi/abs/10.1145/371920.372071 <br>
 Since the collaborative filtering problem can be viewed as a generalization of the classification/regression modeling problem, neighborhood-based methods can be viewed as generalizations of nearest neighbor classifiers in the machine learning literature.
 
 **A. User-Based Neighborhood Models**
