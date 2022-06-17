@@ -1,4 +1,6 @@
-# Recommender System methods
+# Recommender System methods:
+
+This repo contains the explanation of some of the recommender system methods present in the literature. I have tried to implement them using python and tested their performance. Enjoy the reading.
 
 ## 1. Collaborative Filtering
 
